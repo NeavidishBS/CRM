@@ -1,0 +1,78 @@
+  {% load humanize %}
+  <script>
+    $(document).ready(function() {
+    $('#contracts').DataTable({
+        "order": [[ 0, "desc" ]],
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+         "dom": '<"top"ifl<"clear">>rt<"bottom"ip<"clear">>',
+    } );
+   
+} );
+</script>
+
+
+
+            <table id="contracts" class="table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Client</th>
+                            <th>Service</th>
+                            <th width="150">Amount</th>
+                            <th width="150">Amount, AZN</th>
+                            <th>Added By</th>
+                            <th>Start</th>
+                            <th>Age</th>
+                            <th>End </th>
+                            <th>Status</th>
+                            <th>Audit</th>
+                            <th>Completion</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% if contracts %}
+                        {% for contract in contracts %}
+                        <tr>
+
+                            <td><a href="{% url 'contract_view' contract.id %}">{{contract.id}}</a></td>
+                            <td>{{contract.title}}</td>
+                            <td><a href="{% url 'account_view_contracts' contract.account.id %}">{{contract.account}}</a></td>
+                            <td>{{contract.service}}</td>
+                            <td>{{contract.amount | intcomma }} {{contract.currency}}</td>
+                            <td>{{contract.cost_base}}</td>
+                            <td>{{contract.contract_add_by}}</td>
+                            <td>{{contract.date_start|date:"D, d M, Y"}}</td>
+                            <td>{{contract.date_start | timesince }}</td>
+                            <td>{{contract.date_end|date:"D, d M, Y"}}</td>
+                            <td>
+                                {% if contract.status == 'signed' %}
+                                <span class="label label-success">{{contract.status}}</span>
+
+                                {% elif contract.status == 'completed' %}
+                                <span class="label label-primary">{{contract.status}}</span>
+
+                                {% else %}
+                                <span class="label label-default">{{contract.status}}</span>
+                                {% endif %}
+                            </td>
+                           
+
+                            <td>
+                            {% if contract.contract_audit == 'ok'%}
+                            <span class="label label-info">{{contract.contract_audit}}</span>
+                            {% else%}
+                            <span class="label label-warning">{{contract.contract_audit}}</span>
+                            {% endif%}
+                            </td> 
+                            <td>{{contract.contract_completion}}</td>
+                          
+
+                        </tr>
+                        {% endfor%}
+
+                        {% endif%}
+                    </tbody>
+                </table>

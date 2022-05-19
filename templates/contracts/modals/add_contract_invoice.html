@@ -1,0 +1,62 @@
+<form action="{% url 'add_contract_invoice' contract.id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+<div class="card-body">
+
+
+        <!-- sample modal content -->
+        <div id="addContractInvoice" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title mt-0" id="myModalLabel">Adding Invoice for</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                    </div>
+
+
+        <div class="modal-body">
+
+        <div class="form-group" style="background-color:lightgray">
+        <dt>Instruction:</dt> You are adding Invoice to  <dt>{{contract.title}}</dt>
+        <br>
+        </div>
+
+      
+        <div class="form-group"><label for="userName">Contract</label> {{InvoiceFormTemplate.contract}}</div>
+
+      
+        <div class="form-group"><label for="userName">Title</label> {{ InvoiceFormTemplate.title}}</div>
+
+        <div class="form-group"><label for="userName">Amount</label> {{ InvoiceFormTemplate.amount}}</div>
+
+        <div class="form-group"><label for="userName">Currency</label>{{ InvoiceFormTemplate.currency}}</div>
+
+        <div class="form-group"><label for="userName">Date Start</label> {{ InvoiceFormTemplate.date_start}}</div>
+
+        <div class="form-group"><label for="userName">Date Due</label> {{ InvoiceFormTemplate.date_end}}</div>
+
+        {{ InvoiceFormTemplate.invoice_add_by}}
+        {{ InvoiceFormTemplate.rate}}
+
+        <div class="form-group"><label for="userName">Status</label> {{ InvoiceFormTemplate.status}}</div>
+
+       
+                   
+        <div class="modal-footer">
+            <button type="button" href="" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary waves-effect waves-light">Create</button>
+        </div>
+
+
+        </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+</div>
+        <!--  Modal content for the above example -->
+
+</form>

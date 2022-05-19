@@ -1,0 +1,46 @@
+<form action="{% url 'add_contract_file' contract.id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card-body">
+
+
+        <!-- sample modal content -->
+        <div id="addContractlFile" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    
+
+                        <h4 class="modal-title mt-0" id="myModalLabel">Adding File for {{contract.title}}</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                    </div>
+
+
+                    <div class="modal-body">
+
+                
+           <!-- <div class="form-group"><label for="filename">File Name</label>         {{ContractFilesFormTemplate.filename}}</div> -->
+           <div class="form-group"><label for="file">File Name</label>             {{ContractFilesFormTemplate.file}}</div>
+           <div class="form-group"><label for="key_file">Key File</label>          {{ContractFilesFormTemplate.key_file}}</div>
+                                                                                   {{ContractFilesFormTemplate.parent}}
+                                                                                   {{ContractFilesFormTemplate.parent_id}}
+                                                                                   {{ContractFilesFormTemplate.file_add_by}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" href="" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+
+                        <button type="submit" class="btn btn-primary waves-effect waves-light">Create</button>
+                    </div>
+
+
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <!--  Modal content for the above example -->
+
+</form>

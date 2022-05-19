@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}CRM | Contract ID {{contract.id}} {% endblock title %}
+{% block content %}
+
+<button type="button" class="btn btn-w-m btn-warning" ><a href="{% url 'contracts' %}">Back to Contracts</a></button>
+
+ <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="m-b-md">
+                        <a href="" class="btn btn-outline btn-success btn-xs float-right" data-toggle="modal" data-target="#addContractInvoice">Add Invoice</a>
+                        <a href="" class="btn btn-outline btn-warning btn-xs float-right" data-toggle="modal" data-target="#addContractlFile">Add File</a>
+                        <a href="" class="btn btn-outline btn-success btn-xs float-right" data-toggle="modal" data-target="#addContractTask">Add Task</a>
+                    </div>
+                </div>
+
+</div>
+
+<div class="row">
+
+           <dt> Detailed view of  {{contract.title}}</dt>
+
+<table class="table">
+                    <thead bgcolor="#EBF5FB">
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Client</th>
+                            <th>Service</th>
+                            <th>Amount</th>
+                            <th>AZN</th>
+                            <th>Added By</th>                            
+                            <th>Start</th>
+                            <th>Age</th>
+                            <th>End </th>
+                            <th>Status</th>                        
+                            <th>Actual</th>
+                            <th>Planned</th>
+                            <th>Paid</th>
+                            <th>Issued</th>
+                            <th>New</th>
+                            <th>File</th>
+                            
+                            <th>time to Expire</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>{{contract.id}}</td>
+                            <td>{{contract.title}}</td>
+                            <td><a href="{% url 'account_view_contracts' contract.account.id %}">{{contract.account}}</a></td>
+                            <td>{{contract.service}}</td>
+                            <td>{{contract.amount | intcomma }} {{contract.currency}}</td>
+                            <td>{{contract.cost_base}}</td>
+                            <td>{{contract.contract_add_by}}</td>
+                            <td>{{contract.date_start|date:"D, d M, Y"}}</td>
+                            <td>{{contract.date_start | timesince }}</td>
+                            <td>{{contract.date_end|date:"D, d M, Y"}}</td>
+                            <td>
+                                {% if contract.status == 'signed' %}
+                                <span class="label label-success">{{contract.status}}</span>
+                                {% elif contract.status == 'completed' %}
+                                <span class="label label-primary">{{contract.status}}</span>
+                                {% else %}
+                                <span class="label label-default">{{contract.status}}</span> {% endif %}
+                            </td>
+                           
+                         
+                            <td>{{contract.invoice_count}}</td>
+                            <td>{{contract.planned_invoices}}</td>
+                            <td>{{contract.invoice_paid}}</td>
+                            <td>{{contract.invoice_issued}}</td>
+                            <td>{{contract.invoice_new}}</td>
+                            <td>{{proposal.get_time_diff |floatformat}}</td>
+
+                            {% if proposal.get_time_diff < 0 %}
+                            <td>{{proposal.date_expired | timesince}}</td>
+
+                                {% else %}
+                                <td>it ok</td>
+                                {% endif %}
+
+                            <td>{{proposal.date_expired | timesince}}</td>
+                             <td><a href="" data-toggle="modal" data-target="#contractHistory" > <span class="label label-success">History</span> </a> </td>
+                             <td><a href="" data-toggle="modal" data-target="#updateContract"> <span class="label label-info">Update</span> </a></td>
+                              
+
+                        </tr>
+
+
+
+
+
+                    </tbody>
+                </table>
+
+</div>
+<hr>
+<div class="row">
+<div class="col-md-1">
+Summury Information  about <dt>{{contract.title}}</dt>
+<br>
+Planned Invoices: {{contract.planned_invoices}}
+<br>
+The total number of invoices {{contract.invoice_count}}
+<br>
+Status for today: {{contract.contract_audit}}
+<br>
+
+
+</div>
+ 
+<div class="col-md-11">
+ <div class="col-12">  {% include 'contracts/elements/contract_tasks.html' %} </div>
+ <div class="col-12">  {% include 'contracts/elements/contract_comments.html' %} </div>
+ </div>   
+<hr>
+
+
+<hr>
+
+<div class="row"> 
+ <div class="col-12"> {% include 'contracts/elements/contract_invoices.html' %} </div>
+ <div class="col-12">  {% include 'contracts/elements/contract_files.html' %}</div>
+
+ 
+</div>
+
+
+{% endblock %}
+
+
+
+{% block modals %}
+
+{% include 'contracts/modals/add_contract_invoice.html' %}
+{% include 'contracts/modals/update_contract.html' %}
+{% include 'contracts/modals/contractHistory.html' %}
+{% include 'contracts/modals/add_contract_file.html' %}
+{% include 'contracts/modals/add_contract_task.html' %}
+
+{% endblock %}

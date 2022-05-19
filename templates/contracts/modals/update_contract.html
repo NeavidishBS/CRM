@@ -1,0 +1,60 @@
+<form action="" method="POST" enctype="multipart/form-data">
+                         {% csrf_token %}
+                            <div class="card-body">
+
+                                
+                                <!-- sample modal content -->
+                                <div id="updateContract" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                
+                            <h4 class="modal-title mt-0" id="myModalLabel">Adding Contract for {{account.name}}</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+
+
+                                            <div class="modal-body">
+
+                                                 
+
+                         <div class="form-group" style="background-color:lightgray">
+                             <dt>Instruction:</dt> to add a lead, please select an Account first.
+                            If The Account is not listed in the dropdown menu <a href="{% url 'accounts'  %}">Add New Account</a>
+                        </div>
+
+                        
+                     {{ContractUpdateForm.account}}
+
+                       <hr>
+                                
+            <div class="form-group"><label for="userName">Title</label>            {{ContractUpdateForm.title}}</div> 
+                                                                                   {{ContractUpdateForm.contract_add_by}}
+                                                                                   {{ContractUpdateForm.rate}}
+            <div class="form-group"><label for="userName">Service</label>          {{ContractUpdateForm.service}}</div> 
+            <div class="form-group"><label for="userName">Date Start</label>       {{ContractUpdateForm.date_start}}</div>
+            <div class="form-group"><label for="userName">Date End</label>         {{ContractUpdateForm.date_end}} </div>                    
+            <div class="form-group"><label for="userName">Amount</label>           {{ContractUpdateForm.amount}}</div>            
+            <div class="form-group"><label for="userName">Currency</label>         {{ContractUpdateForm.currency}}</div>            
+            <div class="form-group"><label for="userName">Status</label>           {{ContractUpdateForm.status}}</div>
+            <div class="form-group"><label for="userName">Planned Invoices</label> {{ContractUpdateForm.planned_invoices}}</div>
+                                    
+            <hr>
+      
+ 
+            </div>
+           <div class="modal-footer">
+            <button type="button" href="" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary waves-effect waves-light">Update</button>
+           </div>
+
+                           
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+
+                                <!--  Modal content for the above example -->
+                        
+ </form>
